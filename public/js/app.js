@@ -68897,13 +68897,27 @@ var Example =
 function (_Component) {
   _inherits(Example, _Component);
 
-  function Example() {
+  function Example(props) {
+    var _this;
+
     _classCallCheck(this, Example);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Example).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Example).call(this, props));
+    _this.state = {
+      user: null
+    };
+    return _this;
   }
 
   _createClass(Example, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        user: JSON.parse(document.getElementById('user').value)
+      });
+      document.getElementById('user').value = ''; //preventing displaying information in DevTools
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -68916,7 +68930,7 @@ function (_Component) {
         className: "card"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-header"
-      }, "Example Component"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Hello ", this.state.user ? this.state.user.name : 'unknown'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-body"
       }, "I'm an example component!")))));
     }
